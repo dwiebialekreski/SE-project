@@ -33,6 +33,11 @@ class TestDashboardUpdateChart(unittest.TestCase):
         dashboard.updateChart(42.5)
         self.assertIn("42.5", str(dashboard.displayStatus))
 
+    def test_update_chart_rounds_to_two_decimal_places(self):
+        dashboard = Dashboard([])
+        dashboard.updateChart(42.5678)
+        self.assertEqual(dashboard.displayStatus, "42.57")
+
 
 if __name__ == "__main__":
     unittest.main()

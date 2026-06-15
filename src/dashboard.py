@@ -8,4 +8,4 @@ class Dashboard:
         self.displayStatus: str = ""
 
     def updateChart(self, level: float) -> None:
-        self.displayStatus = str(level)
+        self.displayStatus = str(round(level, 2))
