@@ -42,6 +42,20 @@ class WaterLevelSensor(Sensor):
         """
         return self.currentLevel
 
-    def transmitData(self) -> None:
-        """Symuluje nowy odczyt czujnika — inkrementuje poziom wody."""
-        self.currentLevel += 1.0
+    def transmitData(self, force_level: float = None) -> None:
+        """
+        Symuluje nowy odczyt czujnika.
+
+        Domyślnie inkrementuje poziom wody o 1.0.
+        Opcjonalny parametr force_level pozwala wymusić konkretną wartość
+        (np. na potrzeby testowania alertów).
+
+        Args:
+            force_level (float, optional): Wartość do wymuszenia. Jeśli None,
+                                           poziom wody jest inkrementowany o 1.0.
+        """
+        if force_level is not None:
+            self.currentLevel = force_level
+        else:
+            self.currentLevel += 1.0
+

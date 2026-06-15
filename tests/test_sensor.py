@@ -73,6 +73,12 @@ class TestWaterLevelSensorTransmitData(unittest.TestCase):
         sensor.transmitData()
         self.assertGreater(sensor.getWaterLevel(), 10.0)
 
+    def test_transmit_data_force_level_sets_exact_value(self):
+        """transmitData(force_level=X) powinien ustawić currentLevel na X."""
+        sensor = WaterLevelSensor(sensorID="sensor-004", initial_level=10.0)
+        sensor.transmitData(force_level=99.5)
+        self.assertEqual(sensor.getWaterLevel(), 99.5)
+
 
 if __name__ == "__main__":
     unittest.main()
