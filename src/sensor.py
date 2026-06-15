@@ -20,9 +20,9 @@ class WaterLevelSensor(Sensor):
     Nie wymaga połączenia ze sprzętem — działa wyłącznie w pamięci programu.
     """
 
-    def __init__(self, sensorID: str) -> None:
+    def __init__(self, sensorID: str, initial_level: float = 0.0) -> None:
         super().__init__(sensorID)
-        self.currentLevel: float = 0.0
+        self.currentLevel: float = initial_level
 
     def pingStatus(self) -> bool:
         """

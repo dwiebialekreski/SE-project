@@ -52,6 +52,11 @@ class TestWaterLevelSensorGetWaterLevel(unittest.TestCase):
         sensor = WaterLevelSensor(sensorID="sensor-003")
         self.assertEqual(sensor.getWaterLevel(), sensor.currentLevel)
 
+    def test_get_water_level_with_injected_initial_value(self):
+        """Konstruktor powinien przyjmować initial_level i ustawiać currentLevel."""
+        sensor = WaterLevelSensor(sensorID="sensor-003", initial_level=5.75)
+        self.assertEqual(sensor.getWaterLevel(), 5.75)
+
 
 if __name__ == "__main__":
     unittest.main()
