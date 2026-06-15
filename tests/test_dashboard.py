@@ -21,5 +21,18 @@ class TestDashboardInit(unittest.TestCase):
         self.assertEqual(dashboard.sensors, [])
 
 
+class TestDashboardUpdateChart(unittest.TestCase):
+
+    def test_update_chart_sets_display_status(self):
+        dashboard = Dashboard([])
+        dashboard.updateChart(42.5)
+        self.assertIsNotNone(dashboard.displayStatus)
+
+    def test_update_chart_stores_level_in_display_status(self):
+        dashboard = Dashboard([])
+        dashboard.updateChart(42.5)
+        self.assertIn("42.5", str(dashboard.displayStatus))
+
+
 if __name__ == "__main__":
     unittest.main()
