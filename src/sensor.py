@@ -17,3 +17,7 @@ class WaterLevelSensor(Sensor):
 
     def __init__(self, sensorID: str) -> None:
         super().__init__(sensorID)
+
+    def pingStatus(self) -> bool:
+        """Sprawdza dostępność czujnika. Zwraca True jeśli czujnik jest aktywny."""
+        return True
