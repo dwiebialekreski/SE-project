@@ -25,5 +25,19 @@ class TestWaterLevelSensorInit(unittest.TestCase):
         self.assertEqual(sensor.status, "ACTIVE")
 
 
+class TestWaterLevelSensorPingStatus(unittest.TestCase):
+
+    def test_ping_status_returns_bool(self):
+        """pingStatus() powinien zwracać wartość typu bool."""
+        sensor = WaterLevelSensor(sensorID="sensor-002")
+        result = sensor.pingStatus()
+        self.assertIsInstance(result, bool)
+
+    def test_ping_status_returns_true(self):
+        """pingStatus() powinien zwracać True dla aktywnego czujnika."""
+        sensor = WaterLevelSensor(sensorID="sensor-002")
+        self.assertTrue(sensor.pingStatus())
+
+
 if __name__ == "__main__":
     unittest.main()
