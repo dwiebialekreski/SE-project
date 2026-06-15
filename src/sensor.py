@@ -22,6 +22,7 @@ class WaterLevelSensor(Sensor):
 
     def __init__(self, sensorID: str) -> None:
         super().__init__(sensorID)
+        self.currentLevel: float = 0.0
 
     def pingStatus(self) -> bool:
         """
@@ -31,3 +32,13 @@ class WaterLevelSensor(Sensor):
             bool: True jeśli czujnik jest aktywny i odpowiada na zapytania.
         """
         return True
+
+    def getWaterLevel(self) -> float:
+        """
+        Zwraca aktualny poziom wody zarejestrowany przez czujnik.
+
+        Returns:
+            float: Aktualny poziom wody (currentLevel).
+        """
+        return self.currentLevel
+
