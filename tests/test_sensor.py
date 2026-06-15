@@ -39,5 +39,19 @@ class TestWaterLevelSensorPingStatus(unittest.TestCase):
         self.assertTrue(sensor.pingStatus())
 
 
+class TestWaterLevelSensorGetWaterLevel(unittest.TestCase):
+
+    def test_get_water_level_returns_float(self):
+        """getWaterLevel() powinien zwracać wartość typu float."""
+        sensor = WaterLevelSensor(sensorID="sensor-003")
+        result = sensor.getWaterLevel()
+        self.assertIsInstance(result, float)
+
+    def test_get_water_level_returns_current_level(self):
+        """getWaterLevel() powinien zwracać wartość pola currentLevel."""
+        sensor = WaterLevelSensor(sensorID="sensor-003")
+        self.assertEqual(sensor.getWaterLevel(), sensor.currentLevel)
+
+
 if __name__ == "__main__":
     unittest.main()
