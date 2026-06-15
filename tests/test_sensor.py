@@ -58,5 +58,21 @@ class TestWaterLevelSensorGetWaterLevel(unittest.TestCase):
         self.assertEqual(sensor.getWaterLevel(), 5.75)
 
 
+class TestWaterLevelSensorTransmitData(unittest.TestCase):
+
+    def test_transmit_data_changes_current_level(self):
+        """transmitData() powinien zmienić wartość pola currentLevel."""
+        sensor = WaterLevelSensor(sensorID="sensor-004", initial_level=10.0)
+        level_before = sensor.getWaterLevel()
+        sensor.transmitData()
+        self.assertNotEqual(sensor.getWaterLevel(), level_before)
+
+    def test_transmit_data_increments_level(self):
+        """transmitData() powinien inkrementować poziom wody."""
+        sensor = WaterLevelSensor(sensorID="sensor-004", initial_level=10.0)
+        sensor.transmitData()
+        self.assertGreater(sensor.getWaterLevel(), 10.0)
+
+
 if __name__ == "__main__":
     unittest.main()
