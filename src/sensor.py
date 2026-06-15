@@ -42,3 +42,6 @@ class WaterLevelSensor(Sensor):
         """
         return self.currentLevel
 
+    def transmitData(self) -> None:
+        """Symuluje nowy odczyt czujnika — inkrementuje poziom wody."""
+        self.currentLevel += 1.0
