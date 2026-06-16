@@ -56,5 +56,27 @@ class TestDashboardCheckThreshold(unittest.TestCase):
         self.assertEqual(self.dashboard.checkThreshold(30.0), ThresholdStatus.NORMAL)
 
 
+class TestDashboardTriggerVisualAlert(unittest.TestCase):
+
+    def setUp(self):
+        from src.config import ThresholdConfig
+        self.config = ThresholdConfig(warningLevel=50.0, criticalLevel=80.0)
+        self.dashboard = Dashboard([], self.config)
+
+    def test_trigger_visual_alert_called_on_critical(self):
+        from unittest.mock import MagicMock
+        mock_alert = MagicMock()
+        self.dashboard.alertManager = mock_alert
+        self.dashboard.processLevel(90.0)
+        mock_alert.triggerVisualAlert.assert_called_once_with(90.0)
+
+    def test_trigger_visual_alert_not_called_on_normal(self):
+        from unittest.mock import MagicMock
+        mock_alert = MagicMock()
+        self.dashboard.alertManager = mock_alert
+        self.dashboard.processLevel(30.0)
+        mock_alert.triggerVisualAlert.assert_not_called()
+
+
 if __name__ == "__main__":
     unittest.main()
