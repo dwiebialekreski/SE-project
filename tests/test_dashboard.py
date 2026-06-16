@@ -1,7 +1,7 @@
 import unittest
 
 from src.sensor import WaterLevelSensor
-from src.dashboard import Dashboard
+from src.dashboard import Dashboard, ThresholdStatus
 
 
 class TestDashboardInit(unittest.TestCase):
@@ -47,13 +47,13 @@ class TestDashboardCheckThreshold(unittest.TestCase):
         self.dashboard = Dashboard([], self.config)
 
     def test_check_threshold_returns_critical(self):
-        self.assertEqual(self.dashboard.checkThreshold(90.0), "CRITICAL")
+        self.assertEqual(self.dashboard.checkThreshold(90.0), ThresholdStatus.CRITICAL)
 
     def test_check_threshold_returns_warning(self):
-        self.assertEqual(self.dashboard.checkThreshold(60.0), "WARNING")
+        self.assertEqual(self.dashboard.checkThreshold(60.0), ThresholdStatus.WARNING)
 
     def test_check_threshold_returns_normal(self):
-        self.assertEqual(self.dashboard.checkThreshold(30.0), "NORMAL")
+        self.assertEqual(self.dashboard.checkThreshold(30.0), ThresholdStatus.NORMAL)
 
 
 if __name__ == "__main__":

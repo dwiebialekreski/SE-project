@@ -1,5 +1,13 @@
+from enum import Enum
+
 from src.sensor import WaterLevelSensor
 from src.config import ThresholdConfig
+
+
+class ThresholdStatus(Enum):
+    NORMAL = "NORMAL"
+    WARNING = "WARNING"
+    CRITICAL = "CRITICAL"
 
 
 class Dashboard:
@@ -12,9 +20,9 @@ class Dashboard:
     def updateChart(self, level: float) -> None:
         self.displayStatus = str(round(level, 2))
 
-    def checkThreshold(self, level: float) -> str:
+    def checkThreshold(self, level: float) -> ThresholdStatus:
         if level >= self.config.criticalLevel:
-            return "CRITICAL"
+            return ThresholdStatus.CRITICAL
         elif level >= self.config.warningLevel:
-            return "WARNING"
-        return "NORMAL"
+            return ThresholdStatus.WARNING
+        return ThresholdStatus.NORMAL
