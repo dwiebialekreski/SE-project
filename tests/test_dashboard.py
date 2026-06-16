@@ -77,6 +77,15 @@ class TestDashboardTriggerVisualAlert(unittest.TestCase):
         self.dashboard.processLevel(30.0)
         mock_alert.triggerVisualAlert.assert_not_called()
 
+    def test_process_level_executes_under_2_seconds(self):
+        import time
+        from unittest.mock import MagicMock
+        self.dashboard.alertManager = MagicMock()
+        start = time.time()
+        self.dashboard.processLevel(90.0)
+        elapsed = time.time() - start
+        self.assertLess(elapsed, 2.0)
+
 
 if __name__ == "__main__":
     unittest.main()
