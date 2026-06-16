@@ -1,7 +1,7 @@
 import unittest
 from unittest.mock import MagicMock, patch
 
-from src.alert import AlertManager
+from src.alert import AlertManager, EMAIL_SUBJECT, EMAIL_BODY
 
 
 class TestAlertManagerDispatchEmail(unittest.TestCase):
@@ -26,6 +26,14 @@ class TestAlertManagerDispatchEmail(unittest.TestCase):
         mock_email_api = MagicMock()
         alert.emailApi = mock_email_api
         mock_email_api.send.assert_not_called()
+
+    def test_dispatch_email_uses_email_subject_constant(self):
+        alert = AlertManager()
+        mock_email_api = MagicMock()
+        alert.emailApi = mock_email_api
+        alert.dispatchEmail(operatorID="op-001")
+        call_kwargs = mock_email_api.send.call_args
+        self.assertEqual(call_kwargs.kwargs["subject"], EMAIL_SUBJECT)
 
 
 if __name__ == "__main__":

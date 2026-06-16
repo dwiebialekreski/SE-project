@@ -1,3 +1,7 @@
+EMAIL_SUBJECT = "EDODS ALERT: Critical Water Level"
+EMAIL_BODY = "Water level has exceeded the critical threshold. Immediate action required."
+
+
 class AlertManager:
 
     def __init__(self) -> None:
@@ -7,4 +11,4 @@ class AlertManager:
         pass
 
     def dispatchEmail(self, operatorID: str) -> None:
-        self.emailApi.send(to=operatorID, subject="ALERT", body="Water level critical")
+        self.emailApi.send(to=operatorID, subject=EMAIL_SUBJECT, body=EMAIL_BODY)
